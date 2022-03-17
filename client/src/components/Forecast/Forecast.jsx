@@ -3,11 +3,11 @@ import { format, parseISO } from 'date-fns';
 import * as S from './style';
 
 function Forecast({ weather }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
   //  screen size
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 500);
     };
     window.addEventListener('resize', handleResize);
     return () => {

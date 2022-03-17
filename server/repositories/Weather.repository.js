@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_KEY = 'bd2d88e4012244f5adb113522221603';
+const API_KEY = '8676a9b25d4b453e9cd125914221703';
 const baseUrl = 'http://api.weatherapi.com/v1/current.json';
 
 const getWeather = async ({ locationName }) => {

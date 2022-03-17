@@ -16,6 +16,7 @@ export const LeftSection = styled.section`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-evenly;
 `;
 
@@ -24,6 +25,7 @@ export const RightSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 `;
 
 export const Temp = styled.h1`
@@ -46,8 +48,8 @@ export const LocalTime = styled.p`
   color: white;
 `;
 export const Icon = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 150px;
+  height: 150px;
 `;
 export const Header = styled.h2`
   font-size: 1.5em;

@@ -35,6 +35,7 @@ function App() {
       const { data } = await axios.get(`${apiUrl}search/${query}`);
       setMemo({ query: data });
       setWeather(data);
+      setError(null);
     } catch (e) {
       setError(e);
     }

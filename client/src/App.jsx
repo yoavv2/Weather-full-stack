@@ -1,17 +1,24 @@
-import React, { useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
 
-import { SearchWeather } from "./components/SearchWeather/SearchWeather";
-import Forecast from "./components/Forecast/Forecast";
+import { SearchWeather } from './components/SearchWeather/SearchWeather';
+import Forecast from './components/Forecast/Forecast';
 
-const apiUrl = "http://localhost:4000/";
+const apiUrl = 'http://localhost:4000/';
 const AppContainer = styled.div`
-  height: 100vh;
+  width: min(100% - 2rem, 70rem);
+  margin: 2em auto;
   display: flex;
   flex-direction: column;
-  background-color: #ffecae;
-  padding: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Error = styled.div`
+  color: red;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 `;
 
 function App() {
@@ -32,13 +39,13 @@ function App() {
       setError(e);
     }
   };
-  console.log(weather);
+  console.log(memo);
 
   return (
     <AppContainer>
-      {error && <div>{error.message}</div>}
+      {error && <Error>Could not find the city</Error>}
       <SearchWeather handleWeather={handleWeather} />
-      {/* <Forecast weather={weather} /> */}
+      {weather && <Forecast weather={weather} />}
     </AppContainer>
   );
 }

@@ -1,32 +1,52 @@
-import React, { useState } from "react";
-import {
-  ForecastContainer,
-  Header,
-  LocalTime,
-  Icon,
-  Temp,
-  Description,
-  FeelsLikeTemp,
-} from "./styles";
-
-// import { format, parseISO } from "date-fns";
+import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
+import * as S from './style';
 
 function Forecast({ weather }) {
-  return (
-    <ForecastContainer>
-      <Header> {weather?.location.name}</Header>
-      <LocalTime>
-        {/* {format(parseISO(weather?.location.localtime), 'MMMM dd, yyyy')} */}
-        <Icon
-          src={weather?.current.condition.icon}
-          alt={weather?.current.condition.text}
-        />
-      </LocalTime>
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  //  screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-      <Temp>{weather?.current.temp_c}&deg;C</Temp>
-      <FeelsLikeTemp>{weather?.current.feelslike_c}</FeelsLikeTemp>
-      <Description>{weather?.current.condition.text}</Description>
-    </ForecastContainer>
+  return (
+    <S.ForecastContainer>
+      <S.LeftSection>
+        <S.Temp> {weather?.current.temp_c} ℃</S.Temp>
+        <S.Header> {weather?.location.name}</S.Header>
+
+        {isMobile && (
+          <S.Icon
+            src={weather?.current.condition.icon}
+            alt={weather?.current.condition.text}
+          />
+        )}
+        <S.Country> {weather?.location.country} </S.Country>
+        <S.LocalTime>
+          {format(parseISO(weather?.location.localtime), 'MMMM dd, yyyy')}
+        </S.LocalTime>
+        <S.Description>{weather?.current.condition.text}</S.Description>
+
+        <S.FeelsLikeTemp>
+          Feels like : {weather?.current.feelslike_c} ℃
+        </S.FeelsLikeTemp>
+      </S.LeftSection>
+
+      {!isMobile && (
+        <S.RightSection>
+          <S.Icon
+            src={weather?.current.condition.icon}
+            alt={weather?.current.condition.text}
+          />
+        </S.RightSection>
+      )}
+    </S.ForecastContainer>
   );
 }
 
